@@ -18,7 +18,11 @@ export default function App() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/products");
+      // const response = await axios.get("http://localhost:5000/products");
+      const response = await axios.get(
+        "https://my-product-api-ft1l.onrender.com/products",
+      );
+
       // console.log("Backend Response Object:", response.data);
       setProducts(response.data.data);
       toast.success("Inventory state successfully loaded from MongoDB Atlas");
@@ -39,8 +43,12 @@ export default function App() {
   const handleAddProduct = async (newProductData) => {
     try {
       // Send POST request with data matching fields: category, brand, model, price, quantity
+      // const response = await axios.post(
+      //   "http://localhost:5000/products",
+      //   newProductData,
+      // );
       const response = await axios.post(
-        "http://localhost:5000/products",
+        "https://my-product-api-ft1l.onrender.com/products",
         newProductData,
       );
 
@@ -64,7 +72,10 @@ export default function App() {
   const handleDeleteProduct = async (id) => {
     try {
       // Fire DELETE request to your express endpoint
-      await axios.delete(`http://localhost:5000/products/${id}`);
+      // await axios.delete(`http://localhost:5000/products/${id}`);
+      await axios.delete(
+        `https://my-product-api-ft1l.onrender.com/products/${id}`,
+      );
 
       // Optimistically update frontend state immediately so it disappears from the table
       setProducts((prevProducts) =>
@@ -83,7 +94,7 @@ export default function App() {
       // Fires client update call straight to Express routing tracks
       // Using PUT here (change to axios.patch if your route demands PATCH)
       const response = await axios.put(
-        `http://localhost:5000/products/${id}`,
+        `https://my-product-api-ft1l.onrender.com/products/${id}`,
         updatedData,
       );
 
